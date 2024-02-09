@@ -36,7 +36,11 @@ def generate_content(model, prompt, video_part):
         final_response = " ".join([resp.text for resp in response if resp.text])
         return final_response
     return "No video part provided."
-
+    
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to paigeon video analyzer"}    
+    
 @app.post("/analyze-video/")
 async def analyze_video(request: VideoAnalysisRequest):
     video_part = create_part_from_uri(request.gcs_uri)
