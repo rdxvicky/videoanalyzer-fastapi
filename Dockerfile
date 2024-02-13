@@ -10,11 +10,5 @@ COPY . ./
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 8000 available to the world outside this container
-EXPOSE 8000
-
-# Define environment variable to run the server on 0.0.0.0
-ENV UVICORN_HOST=0.0.0.0
-
 # Run the application
-ENTRYPOINT ["uvicorn", "main:app", "--host", "${UVICORN_HOST}", "--port", "8000", "--reload"]
+CMD uvicorn main:app --port=8000 --host=0.0.0.0
